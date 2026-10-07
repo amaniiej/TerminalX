@@ -1,52 +1,50 @@
 // src/views/marketing/components/Footer.tsx
 import React from 'react';
-import { ShieldCheck, Facebook, Twitter, Linkedin, Globe } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
+  const cols = [
+    { title: 'Product', links: ['Features', 'Integrations', 'Pricing', 'Vault'] },
+    { title: 'Company', links: ['About Us', 'Contact', 'Compliance', 'Security'] },
+    { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
+  ];
 
   return (
-    <footer style={{ padding: '80px 8% 40px', background: '#020617', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'relative', zIndex: 2 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '50px', marginBottom: '60px' }}>
-        
-        {/* Brand Column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '22px', fontWeight: 900 }}>
-            <ShieldCheck size={32} color="#2563EB" /> Accounting ERP
+    <footer style={{ background: '#0a0a0a', borderTop: '1px solid #1e1e1e', padding: '64px 40px 40px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <ShieldCheck size={16} color="#6798ff" />
+              <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.17px' }}>TerminalX</span>
+            </div>
+            <p style={{ fontSize: '14px', color: '#7c7c7c', lineHeight: 1.5, letterSpacing: '-0.17px', margin: 0, maxWidth: '240px' }}>
+              Building the financial backbone for the modern Ethiopian enterprise. Secure, compliant, and lightning-fast.
+            </p>
           </div>
-          <p style={{ color: '#64748B', fontSize: '14px', lineHeight: '1.6' }}>
-            Building the financial backbone for the modern Ethiopian enterprise. Secure, compliant, and lightning-fast.
-          </p>
-          <div style={{ display: 'flex', gap: '15px' }}>
-            {[Facebook, Twitter, Linkedin].map((Icon, i) => (
-              <div key={i} style={{ padding: '8px', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}>
-                <Icon size={18} color="#94A3B8" />
+
+          {cols.map(col => (
+            <div key={col.title}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#a7a7a7', letterSpacing: '0.85px', textTransform: 'uppercase', marginBottom: '16px' }}>
+                {col.title}
               </div>
-            ))}
-          </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {col.links.map(l => (
+                  <span key={l} style={{ fontSize: '14px', color: '#7c7c7c', cursor: 'pointer', letterSpacing: '-0.17px', transition: 'color 0.15s' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#ffffff')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#7c7c7c')}
+                  >{l}</span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Links Columns */}
-        {[
-          { title: 'Product', links: ['Features', 'Integrations', 'Pricing', 'Vault'] },
-          { title: 'Company', links: ['About Us', 'Contact', 'Compliance', 'Security'] },
-          { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] }
-        ].map((col, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <h4 style={{ fontSize: '14px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: 'white' }}>{col.title}</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {col.links.map(link => (
-                <span key={link} style={{ color: '#64748B', fontSize: '14px', cursor: 'pointer', transition: '0.2s' }}>{link}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px', color: '#475569' }}>
-        <div>© {currentYear} Accounting ERP Dashboard. All rights reserved.</div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Globe size={14} /> Addis Ababa, Ethiopia</span>
+        <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#454545', letterSpacing: '0.85px' }}>
+            © {year} TERMINALX — ADDIS ABABA, ETHIOPIA
+          </span>
         </div>
       </div>
     </footer>

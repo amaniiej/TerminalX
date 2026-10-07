@@ -1,60 +1,84 @@
 // src/views/marketing/components/Navbar.tsx
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { ShieldCheck } from 'lucide-react';
 
-export default function Navbar({ onGetStarted }: { onGetStarted: () => void }) {
-  
-  // Helper to handle smooth scrolling
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+const D = {
+  carbon: '#04040b', graphite: '#121113', obsidian: '#1a191b',
+  basalt: '#2b292d', ash: '#eeeef0', chalk: '#e5e5e5',
+  fog: '#7c7a85', green: '#71d083', ledGreen: '#366740',
+  display: "'Red Hat Display', sans-serif",
+  text: "'Red Hat Text', sans-serif",
+  mono: "'Red Hat Mono', monospace",
+};
 
-  const navLinks = [
+export default function Navbar({ onGetStarted }: { onGetStarted: () => void }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  const links = [
     { name: 'Features', id: 'features-section' },
     { name: 'Compliance', id: 'compliance-section' },
     { name: 'Pricing', id: 'pricing-section' },
-    { name: 'Contact us', id: 'contact-section' },
+    { name: 'Contact', id: 'contact-section' },
   ];
 
   return (
     <nav style={{
-      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      padding: '15px 8%', position: 'fixed', top: 0, width: '100%', zIndex: 100,
-      backdropFilter: 'blur(15px)', borderBottom: '1px solid rgba(255,255,255,0.08)',
-      background: 'rgba(2, 6, 23, 0.5)'
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, height: '56px',
+      background: scrolled ? 'rgba(4,4,11,0.95)' : D.carbon,
+      borderBottom: `1px solid ${D.basalt}`,
+      backdropFilter: 'blur(8px)',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '0 32px', boxSizing: 'border-box',
+      transition: 'background 0.2s',
     }}>
-      {/* Clickable Logo leads back to top */}
-      <div 
+      {/* Brand */}
+      <div
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '20px', fontWeight: 900, color: 'white', cursor: 'pointer' }}
+        style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', flexShrink: 0 }}
       >
-        <ShieldCheck size={28} color="#2563EB" /> Accounting ERP
+        <ShieldCheck size={16} color={D.green} strokeWidth={2} />
+        <span style={{ fontFamily: D.display, fontSize: '14px', fontWeight: 600, color: D.chalk, letterSpacing: '0.025em' }}>
+          TerminalX
+        </span>
       </div>
 
-      <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
-        {navLinks.map(link => (
-          <motion.span 
-            key={link.id} 
-            whileHover={{ color: '#fff', scale: 1.05 }}
-            onClick={() => scrollToSection(link.id)}
-            style={{ color: '#94A3B8', fontSize: '14px', fontWeight: 600, cursor: 'pointer', transition: '0.2s' }}
-          >
-            {link.name}
-          </motion.span>
+      {/* Links */}
+      <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+        {links.map(l => (
+          <span
+            key={l.id}
+            onClick={() => scrollTo(l.id)}
+            style={{ fontFamily: D.text, fontSize: '14px', fontWeight: 500, color: D.fog, cursor: 'pointer', letterSpacing: '0.025em', transition: 'color 0.15s' }}
+            onMouseEnter={e => (e.currentTarget.style.color = D.ash)}
+            onMouseLeave={e => (e.currentTarget.style.color = D.fog)}
+          >{l.name}</span>
         ))}
+      </div>
 
-        <motion.button 
-          whileHover={{ scale: 1.05, backgroundColor: '#1d4ed8', boxShadow: '0 0 20px rgba(37, 99, 235, 0.4)' }}
-          whileTap={{ scale: 0.95 }}
+      {/* Actions */}
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        {/* Ghost sign in */}
+        <button
           onClick={onGetStarted}
-          style={{ background: '#2563EB', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '10px', fontWeight: 700, cursor: 'pointer' }}
+          style={{ background: D.obsidian, border: `1px solid ${D.basalt}`, color: D.ash, padding: '6px 14px', borderRadius: '6px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', fontFamily: D.text, letterSpacing: '0.025em', boxShadow: 'rgba(255,255,255,0.06) 0px 1px 0px 0px inset' }}
         >
-          Login
-        </motion.button>
+          Sign in
+        </button>
+        {/* Green CTA */}
+        <button
+          onClick={onGetStarted}
+          style={{ background: D.green, border: `1px solid ${D.ledGreen}`, color: D.carbon, padding: '6px 14px', borderRadius: '6px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', fontFamily: D.text, letterSpacing: '0.025em' }}
+        >
+          Get started
+        </button>
       </div>
     </nav>
   );

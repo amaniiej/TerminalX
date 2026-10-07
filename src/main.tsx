@@ -3,40 +3,41 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AnimatePresence } from 'framer-motion';
 import { LedgerProvider } from './context/LedgerContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
 import LandingPage from './views/marketing/LandingPage';
-import LoginPage from './views/auth/LoginPage';
-import DashboardMain from './views/dashboard/DashboardMain';
+import ComingSoon from './views/ComingSoon';
 
 const App = () => {
-  const [currentView, setCurrentView] = useState<'marketing' | 'auth' | 'dashboard'>('marketing');
+  const [currentView, setCurrentView] = useState<'marketing' | 'comingsoon'>('marketing');
 
   return (
     <LedgerProvider>
-      {/* THE MASTER LOCK: width 100% (not 100vw) + overflowX hidden */}
-      <div style={{ 
-        width: '100%', 
-        minHeight: '100vh', 
-        overflowX: 'hidden', 
-        background: '#020617', 
-        position: 'relative' 
+      <div style={{
+        width: '100%',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        background: '#020617',
+        position: 'relative'
       }}>
         <AnimatePresence mode="wait">
           {currentView === 'marketing' && (
-            <LandingPage key="marketing" onGetStarted={() => setCurrentView('auth')} />
+            <ErrorBoundary key="marketing-boundary">
+              <LandingPage
+                key="marketing"
+                onGetStarted={() => setCurrentView('comingsoon')}
+              />
+            </ErrorBoundary>
           )}
 
-          {currentView === 'auth' && (
-            <LoginPage 
-              key="auth"
-              onLogin={() => setCurrentView('dashboard')} 
-              onBackToMarketing={() => setCurrentView('marketing')}
-            />
-          )}
-
-          {currentView === 'dashboard' && (
-            <DashboardMain key="dashboard" />
+          {currentView === 'comingsoon' && (
+            <ErrorBoundary key="comingsoon-boundary">
+              <ComingSoon
+                key="comingsoon"
+                onBack={() => setCurrentView('marketing')}
+              />
+            </ErrorBoundary>
           )}
         </AnimatePresence>
       </div>

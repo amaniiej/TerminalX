@@ -1,113 +1,56 @@
 // src/views/marketing/components/Compliance.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Gavel, FileLock, CheckCircle, Scale, Eye } from 'lucide-react';
+import { ShieldCheck, Gavel, FileLock, Scale } from 'lucide-react';
 
-const ComplianceFeature = ({ icon: Icon, title, desc }: any) => (
-  <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-    <div style={{ 
-      width: '40px', height: '40px', borderRadius: '10px', 
-      background: 'rgba(37, 99, 235, 0.1)', display: 'flex', 
-      alignItems: 'center', justifyContent: 'center', flexShrink: 0 
-    }}>
-      <Icon size={20} color="#3B82F6" />
-    </div>
+const Item = ({ icon: Icon, title, desc }: any) => (
+  <div style={{ display: 'flex', gap: '16px', marginBottom: '32px' }}>
+    <Icon size={16} color="#6798ff" style={{ marginTop: '3px', flexShrink: 0 }} />
     <div>
-      <h4 style={{ color: 'white', fontSize: '16px', fontWeight: 700, margin: '0 0 5px 0' }}>{title}</h4>
-      <p style={{ color: '#64748B', fontSize: '13px', lineHeight: '1.5', margin: 0 }}>{desc}</p>
+      <div style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.17px', marginBottom: '4px' }}>{title}</div>
+      <p style={{ fontSize: '14px', fontWeight: 400, color: '#a7a7a7', lineHeight: 1.5, letterSpacing: '-0.17px', margin: 0 }}>{desc}</p>
     </div>
   </div>
 );
 
 export default function Compliance() {
   return (
-    <section id="compliance" style={{ padding: '80px 8%', position: 'relative' }}>
-      
-      {/* Background Atmosphere */}
-      <div style={{ position: 'absolute', top: '50%', left: '0', width: '400px', height: '400px', background: '#2563EB', filter: 'blur(150px)', opacity: 0.05, zIndex: 0 }} />
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '60px', alignItems: 'center' }}>
-        
-        {/* --- LEFT SIDE: THE PROOF --- */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          style={{ position: 'relative', zIndex: 2 }}
-        >
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#10B981', fontWeight: 800, fontSize: '10px', letterSpacing: '2px', background: 'rgba(16, 185, 129, 0.1)', padding: '6px 16px', borderRadius: '30px', marginBottom: '20px' }}>
-             <ShieldCheck size={14} fill="#10B981" /> GOVERNMENT READY
+    <section style={{ background: '#141414', padding: '96px 40px', borderTop: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '96px', alignItems: 'center' }}>
+        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#a7a7a7', letterSpacing: '0.85px', textTransform: 'uppercase', marginBottom: '16px' }}>
+            Government Ready
           </div>
-          
-          <h2 style={{ fontSize: '42px', fontWeight: 900, color: 'white', letterSpacing: '-2px', lineHeight: 1.1, marginBottom: '30px' }}>
-            Built for the <br/> <span style={{ color: '#2563EB' }}>Ethiopian Legal Framework.</span>
+          <h2 style={{ fontSize: '40px', fontWeight: 600, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.84px', marginBottom: '48px', margin: '0 0 48px 0' }}>
+            Built for the<br /><span style={{ color: '#6798ff' }}>Ethiopian Legal Framework.</span>
           </h2>
-
-          <ComplianceFeature 
-            icon={Scale}
-            title="ERCA Directive Alignment"
-            desc="Our calculation engine is hard-coded to match the latest Ministry of Revenues VAT (15%) and TOT (2%) directives."
-          />
-          <ComplianceFeature 
-            icon={FileLock}
-            title="Encrypted Audit Trail"
-            desc="Every transaction is cryptographically hashed. In a surprise audit, generate a verified history in under 60 seconds."
-          />
-          <ComplianceFeature 
-            icon={Gavel}
-            title="Withholding Tax Automation"
-            desc="Automatically detect and withhold the required 2% for local payments over 10,000 ETB, as per legal requirements."
-          />
+          <Item icon={Scale} title="ERCA Directive Alignment" desc="Our calculation engine is hard-coded to match the latest Ministry of Revenues VAT (15%) and TOT (2%) directives." />
+          <Item icon={FileLock} title="Encrypted Audit Trail" desc="Every transaction is cryptographically hashed. In a surprise audit, generate a verified history in under 60 seconds." />
+          <Item icon={Gavel} title="Withholding Tax Automation" desc="Automatically detect and withhold the required 2% for local payments over 10,000 ETB, as per legal requirements." />
         </motion.div>
 
-        {/* --- RIGHT SIDE: THE VISUAL (Certification Card) --- */}
-        <motion.div
-          whileHover={{ rotateY: 10, rotateX: -5 }}
-          style={{ 
-            perspective: '1000px', 
-            position: 'relative', 
-            zIndex: 2,
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
-          <div style={{
-            width: '100%',
-            maxWidth: '400px',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
-            backdropFilter: 'blur(30px)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '32px',
-            padding: '40px',
-            boxShadow: '0 40px 80px rgba(0,0,0,0.4)',
-            textAlign: 'center'
-          }}>
-            <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                style={{ marginBottom: '25px' }}
-            >
-                <ShieldCheck size={80} color="#2563EB" style={{ filter: 'drop-shadow(0 0 20px rgba(37, 99, 235, 0.4))' }} />
+        {/* Card */}
+        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <div style={{ background: '#1e1e1e', border: '1px solid #313131', borderRadius: '8px', padding: '40px', textAlign: 'center' }}>
+            <motion.div animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 4, repeat: Infinity }}>
+              <ShieldCheck size={56} color="#6798ff" style={{ marginBottom: '24px' }} />
             </motion.div>
-
-            <h3 style={{ fontSize: '20px', fontWeight: 800, color: 'white', marginBottom: '10px' }}>Security Certified</h3>
-            <p style={{ color: '#94A3B8', fontSize: '13px', lineHeight: '1.6', marginBottom: '30px' }}>
-                Your data instance is logically isolated and encrypted using AES-256 standards.
+            <div style={{ fontSize: '20px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.42px', marginBottom: '12px' }}>Security Certified</div>
+            <p style={{ fontSize: '14px', color: '#a7a7a7', lineHeight: 1.5, marginBottom: '32px', letterSpacing: '-0.17px' }}>
+              Your data instance is logically isolated and encrypted using AES-256 standards.
             </p>
-
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>STATUS</span>
-                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#10B981' }}>● COMPLIANT</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>LAST AUDIT</span>
-                    <span style={{ fontSize: '11px', fontWeight: 800, color: 'white' }}>28 JAN 2026</span>
-                </div>
+            <div style={{ borderTop: '1px solid #313131', paddingTop: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#7c7c7c', letterSpacing: '0.85px' }}>STATUS</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#6798ff', letterSpacing: '0.85px' }}>● COMPLIANT</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#7c7c7c', letterSpacing: '0.85px' }}>LAST AUDIT</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#ffffff', letterSpacing: '0.85px' }}>28 JAN 2026</span>
+              </div>
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

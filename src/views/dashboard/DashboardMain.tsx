@@ -34,7 +34,7 @@ const ActivityManagement = lazy(() => import('../../components/features/Activity
 const SalaryPayroll = lazy(() => import('../../components/features/Salary/salarypayroll'));
 const Inventory = lazy(() => import('../../components/features/Inventory/inventory'));
 const ActivityCreation = lazy(() => import('../../components/features/Salary/activitycreation'));
-const Chat = lazy(() => import('../../components/features/chat/Chat'));
+const Chat = lazy(() => import('../../components/features/chat/chat'));
 const ProjectCreativity = lazy(() => import('../../components/features/ProjectCreativity/ProjectCreativity'));
 
 // Composant de fallback pour le Suspense
