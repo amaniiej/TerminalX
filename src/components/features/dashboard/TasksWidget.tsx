@@ -17,7 +17,7 @@ const TasksWidget: React.FC = () => {
 
   useEffect(() => {
     const loadTasks = () => {
-      const saved = localStorage.getItem('agrospace_tasks');
+      const saved = localStorage.getItem('terminalx_tasks');
       if (saved) {
         try {
           setTasks(JSON.parse(saved));

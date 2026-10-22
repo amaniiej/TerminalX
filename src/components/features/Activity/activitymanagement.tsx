@@ -94,7 +94,7 @@ interface ActivityManagementProps {
 const ActivityManagement: React.FC<ActivityManagementProps> = ({ searchTerm: globalSearch }) => {
   // --- State Management ---
   const [tasks, setTasks] = useState<Task[]>(() => {
-    const saved = localStorage.getItem('agrospace_tasks');
+    const saved = localStorage.getItem('terminalx_tasks');
     return saved ? JSON.parse(saved) : [];
   });
   
@@ -122,7 +122,7 @@ const ActivityManagement: React.FC<ActivityManagementProps> = ({ searchTerm: glo
 
   // --- Persistence ---
   useEffect(() => {
-    localStorage.setItem('agrospace_tasks', JSON.stringify(tasks));
+    localStorage.setItem('terminalx_tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   // --- Calendar Logic ---
