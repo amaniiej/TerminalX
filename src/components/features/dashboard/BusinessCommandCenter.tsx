@@ -17,8 +17,8 @@ import TasksWidget from './TasksWidget';
 
 interface CompanyProfile {
   name: string;
-  address?: string;
-  tin?: string;
+  address: string;
+  tin: string;
   logo?: string;
   fy?: string;
   q?: string;
@@ -76,7 +76,7 @@ const LiquidShine = () => (
 );
 
 const ProfileEditModal: React.FC<{ profile: CompanyProfile | null; setProfile: (p: CompanyProfile) => void; onClose: () => void; }> = ({ profile, setProfile, onClose }) => {
-  const [formData, setFormData] = useState<CompanyProfile | null>(profile || { name: 'General Table' });
+  const [formData, setFormData] = useState<CompanyProfile | null>(profile || { name: 'General Table', address: '', tin: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev: CompanyProfile | null) => prev ? { ...prev, [e.target.name]: e.target.value } : null);

@@ -31,7 +31,7 @@ const Contact = lazy(() => import('../features/contacts/Contact'));
 const ActivityManagement = lazy(() => import('../features/Activity/activitymanagement'));
 const Inventory = lazy(() => import('../features/Inventory/inventory'));
 const ActivityCreation = lazy(() => import('../features/Salary/activitycreation'));
-const Chat = lazy(() => import('../features/chat/Chat'));
+const Chat = lazy(() => import('../features/chat/chat'));
 const ProjectCreativity = lazy(() => import('../features/ProjectCreativity/ProjectCreativity'));
 
 // --- Composants de secours (UI) ---

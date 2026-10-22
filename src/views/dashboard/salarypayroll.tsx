@@ -11,12 +11,12 @@ const initialEmployees = [
   { id: 'emp5', name: 'Derartu Tulu', role: 'QA Engineer', fayda: '567890123456', gross: 40000, deductions: 6800, net: 33200, status: 'Paid' },
 ];
 
-const AddEmployeeModal = ({ onClose, onAddEmployee }) => {
+const AddEmployeeModal = ({ onClose, onAddEmployee }: { onClose: () => void; onAddEmployee: (emp: any) => void }) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [fayda, setFayda] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onAddEmployee({
       id: `emp${Date.now()}`,
@@ -56,7 +56,7 @@ const SalaryPayroll = () => {
   const [employees, setEmployees] = useState(initialEmployees);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddEmployee = (newEmployee) => {
+  const handleAddEmployee = (newEmployee: any) => {
     setEmployees(prev => [...prev, newEmployee]);
   };
 
